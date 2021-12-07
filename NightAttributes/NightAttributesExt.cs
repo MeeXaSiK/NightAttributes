@@ -52,14 +52,12 @@ namespace Development.Global.Code.NightAttributes
         private static object GetLazy(Type type)
         {
             var instances = Object.FindObjectsOfType(type, true);
-
+            var instance = instances.Length > 0 
+                ? instances[0] 
+                : new GameObject($"[LazyFind] {type.Name}", type).GetComponent(type);
+            
             for (var i = 1; i < instances.Length; i++)
                 Object.Destroy(instances[i]);
-
-            var instance = instances[0];
-
-            if (instance == null)
-                instance = new GameObject($"[LazyFind] {type.Name}", type);
 
             return instance;
         }
