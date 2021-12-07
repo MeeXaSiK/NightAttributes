@@ -35,10 +35,12 @@ Old implementation:
 New implementation:
 
 ```sh
-    public class Demo : MonoBehaviour
-    {
-        [LazyFind] private Player _player;
-    }
+using Development.Global.Code.NightAttributes;
+
+public class Demo : MonoBehaviour
+{
+    [LazyFind] private Player _player;
+}
 ```
 
 ### TODO if attribute using in class, that spawned after awake
