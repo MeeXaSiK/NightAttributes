@@ -18,16 +18,14 @@ Old implementation:
         private void Start()
         {
             var playerInstances = FindObjectsOfType<Player>();
+            var player = playerInstances.Length > 0 
+                ? playerInstances[0] 
+                : new GameObject($"[LazyFind] {type.Name}", type).GetComponent(type);
             
             for (var i = 1; i < playerInstances.Length; i++)
-                Destroy(playerInstances[i]);
+                Destroy(instances[i]);
                 
-            var instance = playerInstances[0];
-            
-            if (instance == null)
-                instance = new GameObject(nameof(Player), typeof(Player));
-                
-            _player = instance;
+            _player = player;
         }
     }
 ```
