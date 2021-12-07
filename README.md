@@ -1,6 +1,11 @@
 # NightAttributes
 Attributes that make life easier for Unity
 
+## How to use
+
+1. Add files into your Unity project
+2. Add "NightAttributesEntry" on any GameObject in scene
+
 ## [LazyFind] Attribute
 
 Old implementation:
