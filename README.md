@@ -43,7 +43,7 @@ public class Demo : MonoBehaviour
 }
 ```
 
-### TODO if attribute using in class, that spawned after awake
+TODO if attribute using in class, that spawned after awake
 
 ```sh
 using Development.Global.Code.NightAttributes;
