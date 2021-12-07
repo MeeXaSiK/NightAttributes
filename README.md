@@ -40,3 +40,20 @@ New implementation:
         [LazyFind] private Player _player;
     }
 ```
+
+### TODO if attribute using in class, that spawned after awake
+
+```sh
+using Development.Global.Code.NightAttributes;
+
+public class SpawnedAfterAwake : MonoBehaviour
+{
+    [LazyFind] public PlayerUnit playerUnit;
+    [LazyFind] public EnemyUnit enemyUnit;
+
+    private void Start()
+    {
+        this.CheckForNightAttributes();
+    }
+}
+```
