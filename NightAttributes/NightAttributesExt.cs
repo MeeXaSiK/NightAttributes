@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -21,8 +22,11 @@ namespace Development.Global.Code.NightAttributes
         
         private static void LazyFindFields(MonoBehaviour monoBehaviour, Type type)
         {
+            var flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance |
+                        BindingFlags.CreateInstance | BindingFlags.Static | BindingFlags.GetField;
+            
             var fields = type.
-                GetFields().
+                GetFields(flags).
                 Where(field => Attribute.IsDefined(field, typeof(LazyFindAttribute)));
 
             foreach (var field in fields)
@@ -36,8 +40,11 @@ namespace Development.Global.Code.NightAttributes
         
         private static void LazyFindProperties(MonoBehaviour monoBehaviour, Type type)
         {
+            var flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance |
+                        BindingFlags.CreateInstance | BindingFlags.Static | BindingFlags.GetProperty;
+            
             var properties = type.
-                GetProperties().
+                GetProperties(flags).
                 Where(property => Attribute.IsDefined(property, typeof(LazyFindAttribute)));
                 
             foreach (var property in properties)
@@ -52,12 +59,14 @@ namespace Development.Global.Code.NightAttributes
         private static object GetLazy(Type type)
         {
             var instances = Object.FindObjectsOfType(type, true);
-            var instance = instances.Length > 0 
-                ? instances[0] 
-                : new GameObject($"[LazyFind] {type.Name}", type).GetComponent(type);
-            
+
             for (var i = 1; i < instances.Length; i++)
                 Object.Destroy(instances[i]);
+
+            var instance = instances[0];
+
+            if (instance == null)
+                instance = new GameObject($"[LazyFind] {type.Name}", type);
 
             return instance;
         }

@@ -11,7 +11,9 @@ namespace Development.Global.Code.NightAttributes
             var all = FindObjectsOfType<MonoBehaviour>();
 
             foreach (var monoBehaviour in all)
+            {
                 monoBehaviour.CheckForNightAttributes();
+            }
         }
     }
 }
