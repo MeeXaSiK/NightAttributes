@@ -1,38 +1,38 @@
 # NightAttributes
-Attributes that make life easier for Unity
+Attributes that make life easier for Unity by [Night Train Code](https://www.youtube.com/c/NightTrainCode/)
 
 ## How to use
 
 1. Add files into your Unity project
-2. Add "NightAttributesEntry" on any GameObject in scene
+2. Add `NightAttributesEntry` on any `GameObject` in scene
 
 ## [LazyFind] Attribute
 
 Old implementation:
 
-```sh
-    public class Demo : MonoBehaviour
+```csharp
+public class Demo : MonoBehaviour
+{
+    private Player _player;
+
+    private void Start()
     {
-        private Player _player;
-    
-        private void Start()
-        {
-            var playerInstances = FindObjectsOfType<Player>();
-            var player = playerInstances.Length > 0 
-                ? playerInstances[0] 
-                : new GameObject($"[LazyFind] {type.Name}", type).GetComponent(type);
+        var playerInstances = FindObjectsOfType<Player>();
+        var player = playerInstances.Length > 0 
+            ? playerInstances[0] 
+            : new GameObject($"[LazyFind] {type.Name}", type).GetComponent(type);
             
-            for (var i = 1; i < playerInstances.Length; i++)
-                Destroy(instances[i]);
+        for (var i = 1; i < playerInstances.Length; i++)
+            Destroy(instances[i]);
                 
-            _player = player;
-        }
+        _player = player;
     }
+}
 ```
 
 New implementation:
 
-```sh
+```csharp
 using Development.Global.Code.NightAttributes;
 
 public class Demo : MonoBehaviour
@@ -43,7 +43,7 @@ public class Demo : MonoBehaviour
 
 TODO if attribute using in class, that spawned after awake
 
-```sh
+```csharp
 using Development.Global.Code.NightAttributes;
 
 public class SpawnedAfterAwake : MonoBehaviour
